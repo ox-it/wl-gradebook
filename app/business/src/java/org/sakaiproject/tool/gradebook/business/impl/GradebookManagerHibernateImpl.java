@@ -556,6 +556,18 @@ public class GradebookManagerHibernateImpl extends BaseHibernateManager
         };
         return (List)getHibernateTemplate().execute(hc);
     }
+
+	public List getAllAssignmentGradeRecords(final Long gradebookId) {
+        HibernateCallback hc = new HibernateCallback() {
+            public Object doInHibernate(Session session) throws HibernateException {
+	            Query q = session.createQuery("from AssignmentGradeRecord as agr where agr.gradableObject.removed=false and " +
+	                    "agr.gradableObject.gradebook.id=:gradebookId order by agr.pointsEarned");
+	            q.setLong("gradebookId", gradebookId.longValue());
+	            return q.list();
+            }
+        };
+        return (List)getHibernateTemplate().execute(hc);
+	}
     
     public List getAllAssignmentGradeRecordsConverted(Long gradebookId, Collection studentUids)
     {

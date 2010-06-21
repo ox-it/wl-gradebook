@@ -166,6 +166,15 @@ public interface GradebookManager {
      * @param studentUids
      */
     public List getAllAssignmentGradeRecords(Long gradebookId, Collection studentUids);
+
+    /**
+     * Gets all grade records that belong to a collection of enrollments in a
+     * gradebook. This returns all grade records regardless of explicit site
+     * membership (unlike see {@link #getAllAssignmentGradeRecords(Long, Collection)}).
+     *
+     * @param gradebookId
+     */
+    public List getAllAssignmentGradeRecords(Long gradebookId);
     
     /**
      * Gets all grade records that belong to a collection of enrollments in a gradebook and
