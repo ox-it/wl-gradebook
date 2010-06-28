@@ -2971,4 +2971,15 @@ public class GradebookManagerHibernateImpl extends BaseHibernateManager
 	    
 	    return assignList;
 	}
+
+	public List getStudentsWhoHaveSubmitted(final Long gradebookId) {
+        HibernateCallback hc = new HibernateCallback() {
+            public Object doInHibernate(Session session) throws HibernateException {
+	            Query q = session.createQuery("select distinct agr.studentId from AssignmentGradeRecord agr where agr.gradableObject.gradebook.id=:gradebookId");
+	            q.setLong("gradebookId", gradebookId.longValue());
+	            return q.list();
+            }
+        };
+        return (List)getHibernateTemplate().execute(hc);
+	}
 }

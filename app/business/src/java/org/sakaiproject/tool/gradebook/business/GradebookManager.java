@@ -177,6 +177,14 @@ public interface GradebookManager {
     public List getAllAssignmentGradeRecords(Long gradebookId);
     
     /**
+     * Get a list of students who have submitted to this gradebook. This is a list of all
+     * students, irrespective of whether or not they are site members.
+     * @param gradebookId the ID of the gradebook.
+     * @return a list of students who have submitted to this gradebook.
+     */
+    public List getStudentsWhoHaveSubmitted(Long gradebookId);
+    
+    /**
      * Gets all grade records that belong to a collection of enrollments in a gradebook and
      * converts the grade returned based upon the grade entry type.
      * @param gradebookId
