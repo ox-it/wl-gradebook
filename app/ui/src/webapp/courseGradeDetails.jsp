@@ -110,7 +110,7 @@
 				<h:outputLink value="#"
 					rendered="#{not empty scoreRow.eventRows}"
 					onclick="javascript:dhtmlPopupToggle('#{scoreRowIndex}', event);return false;">
-					<h:graphicImage value="images/log.png" alt="Show log"/>
+					<h:graphicImage value="images/log.png" alt="#{msgs.inst_view_log_alt}"/>
 				</h:outputLink>
 			</h:column>
 			<h:column>
@@ -175,6 +175,12 @@
 			<h:commandButton
 				value="#{msgs.course_grade_details_export_course_grades}"
 				actionListener="#{courseGradeDetailsBean.exportCsv}"
+				rendered="#{!courseGradeDetailsBean.emptyEnrollments}"
+				style="margin-left: 5em;"
+				/>
+			<h:commandButton
+				value="#{msgs.course_grade_details_export_course_grades_excel}"
+				actionListener="#{courseGradeDetailsBean.exportExcel}"
 				rendered="#{!courseGradeDetailsBean.emptyEnrollments}"
 				/>
 		</p>

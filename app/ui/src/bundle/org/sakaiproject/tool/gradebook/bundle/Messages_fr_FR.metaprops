@@ -16,9 +16,6 @@ add_assignment_counted..text.md5=qFHGWKBwe8AI71LD3AeC2Q\=\=
 add_assignment_counted_detail..text.author=cyril
 add_assignment_counted_detail..text.changed=20090326172204
 add_assignment_counted_detail..text.md5=YznLxpllVBsFIXBROtPVZw\=\=
-add_assignment_date_format..text.author=cyril
-add_assignment_date_format..text.changed=20090326172209
-add_assignment_date_format..text.md5=5N5kPj2BbFGXBMqmFHfaag\=\=
 add_assignment_due_date..text.author=cyril
 add_assignment_due_date..text.changed=20090326172213
 add_assignment_due_date..text.md5=Bem5MAclIQ9ZrEY/NzlDJg\=\=
@@ -415,9 +412,6 @@ course_grade_name..text.md5=g324g3V0sDVtu107MW1nwg\=\=
 course_grade_percent_display..text.author=cyril
 course_grade_percent_display..text.changed=20090329140411
 course_grade_percent_display..text.md5=DqjKf9MaFiJAzyOzmdQBwg\=\=
-date_entry_format_description..text.author=cyril
-date_entry_format_description..text.changed=20090329140416
-date_entry_format_description..text.md5=5N5kPj2BbFGXBMqmFHfaag\=\=
 date_entry_today_is..text.author=cyril
 date_entry_today_is..text.changed=20090329140419
 date_entry_today_is..text.md5=kYZ8bJV0mpc9QGRYkfHCpQ\=\=
@@ -484,9 +478,6 @@ error_no_role..text.md5=GUACl6ufNKNez6HQgsFRIw\=\=
 export_course_grade_prefix..text.author=cyril
 export_course_grade_prefix..text.changed=20090329140556
 export_course_grade_prefix..text.md5=4Xl7aGetRnP9Njcm0prM0Q\=\=
-export_filename_date_format..text.author=cyril
-export_filename_date_format..text.changed=20090329140611
-export_filename_date_format..text.md5=CTcXiTXwZwxRVZhVNsErpg\=\=
 export_grade_for_sis_prefix..text.author=cyril
 export_grade_for_sis_prefix..text.changed=20090329170957
 export_grade_for_sis_prefix..text.md5=yBvDVMvLx2LmI8OG+gjZRw\=\=
@@ -661,9 +652,6 @@ grader_rules_instruction..text.md5=qmhOAl1lKKmqsxUJajk1WA\=\=
 grader_rules_invalid_category..text.author=cyril
 grader_rules_invalid_category..text.changed=20090329174806
 grader_rules_invalid_category..text.md5=pcdYPVy2hzIErIWcHZ8CLQ\=\=
-grader_rules_invalid_function..text.author=cyril
-grader_rules_invalid_function..text.changed=20090329174844
-grader_rules_invalid_function..text.md5=/f4yiy1S6OhsFkl5bqEkgQ\=\=
 grader_rules_invalid_grader..text.author=cyril
 grader_rules_invalid_grader..text.changed=20090329174908
 grader_rules_invalid_grader..text.md5=J3oI46swE+APmK9rfTan2g\=\=
@@ -955,9 +943,6 @@ inst_view_grade_editor..text.md5=HslleO9R5Xrql6rLw6hLqQ\=\=
 inst_view_grade_letter..text.author=cyril
 inst_view_grade_letter..text.changed=20090329123012
 inst_view_grade_letter..text.md5=uAv7l/04uqUDaU7SWrWG3Q\=\=
-inst_view_grade_percent..text.author=cyril
-inst_view_grade_percent..text.changed=20090329123004
-inst_view_grade_percent..text.md5=te1cPmc4dfIFM6LE9b0CSg\=\=
 inst_view_grading_table..text.author=cyril
 inst_view_grading_table..text.changed=20090329122953
 inst_view_grading_table..text.md5=yG9nlS/NXjY7lVURaL2s8g\=\=
@@ -1177,9 +1162,6 @@ overview_grade_editor..text.md5=HslleO9R5Xrql6rLw6hLqQ\=\=
 overview_grade_option_all_viewable..text.author=cyril
 overview_grade_option_all_viewable..text.changed=20090329115740
 overview_grade_option_all_viewable..text.md5=yWPyCyo/NAV9xAhcDiVI7w\=\=
-overview_grade_option_assignments_viewable..text.author=cyril
-overview_grade_option_assignments_viewable..text.changed=20090329115726
-overview_grade_option_assignments_viewable..text.md5=0HzMoK+/yPMEGmB0riRPHg\=\=
 overview_grade_option_change..text.author=cyril
 overview_grade_option_change..text.changed=20090329115721
 overview_grade_option_change..text.md5=gxKy6nl1UcOvCNdk7AsYDQ\=\=

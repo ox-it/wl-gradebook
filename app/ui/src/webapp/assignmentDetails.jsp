@@ -50,7 +50,7 @@
 			columns="2"
 			columnClasses="itemName"
 			styleClass="itemSummary"
- 			summary="Table contains information on assignment properties"
+ 			summary="#{msgs.assignment_details_table_summary}"
 			border="0">
 				<h:outputText id="titleLabel" value="#{msgs.assignment_details_title}"/>
 				<h:outputText id="title" value="#{assignmentDetailsBean.assignment.name}"/>
@@ -131,7 +131,7 @@
 			<%@include file="/inc/filterPaging.jspf"%>
 		</t:aliasBean>
 		
-		<div class="act gbButtonBar">
+		<div id="buttonDiv1" class="act gbButtonBar">
 			<h:commandButton
 				id="saveButton1"
 				styleClass="active"
@@ -141,7 +141,8 @@
 				rendered="#{!assignmentDetailsBean.emptyEnrollments}"
 				accesskey="s"
 				tabindex="9998"
-				title="#{msgs.assignment_details_submit}"/>
+				title="#{msgs.assignment_details_submit}"
+				onclick="disableButton('buttonDiv1', this)"/>
 			<h:commandButton
 				id="cancelButton1"
 				value="#{msgs.assignment_details_cancel}"
@@ -151,8 +152,8 @@
 				accesskey="c"
 				immediate="true"
 				tabindex="9999"
-				title="#{msgs.assignment_details_cancel}">
-					<f:param name="breadcrumbPage" value="#{assignmentDetailsBean.breadcrumbPage}" />
+				title="#{msgs.assignment_details_cancel}" onclick="disableButton('buttonDiv1', this)">
+					<f:param name="breadcrumbPage" value="#{assignmentDetailsBean.breadcrumbPage}"/>
 			</h:commandButton>
 		</div>
 
@@ -199,7 +200,7 @@
 				<h:outputLink value="#"
 					rendered="#{not empty scoreRow.eventRows}"
 					onclick="javascript:dhtmlPopupToggle('#{scoreRowIndex}', event);return false;">
-					<h:graphicImage value="images/log.png" alt="Show log"/>
+					<h:graphicImage value="images/log.png" alt="#{msgs.inst_view_log_alt}"/>
 				</h:outputLink>
 			</h:column>
 
@@ -221,6 +222,8 @@
 							<f:validateDoubleRange minimum="0"/>
 							<f:validator validatorId="org.sakaiproject.gradebook.jsf.validator.ASSIGNMENT_GRADE"/>
 						</h:inputText>
+            <h:outputText value="#{msgs.assignment_details_percent_input}" rendered="#{assignmentDetailsBean.gradeEntryByPercent}"
+              style="margin-left: 5px;" />
 						<h:inputText id="LetterScore" value="#{scoreRow.letterScore}" size="6" 
 							 rendered="#{assignmentDetailsBean.gradeEntryByLetter}"
 							 style="text-align:right;" onkeypress="return submitOnEnter(event, 'gbForm:saveButton');">
@@ -232,6 +235,7 @@
 						<h:outputText value="#{scoreRow.score}" rendered="#{assignmentDetailsBean.gradeEntryByPoints || assignmentDetailsBean.gradeEntryByPercent}">
 							<f:converter converterId="org.sakaiproject.gradebook.jsf.converter.POINTS" />
 						</h:outputText>
+            <h:outputText value="#{msgs.assignment_details_percent_input}" rendered="#{assignmentDetailsBean.gradeEntryByPercent && scoreRow.score != null}" />
 						<h:outputText value="#{scoreRow.letterScore}" 
 							 rendered="#{assignmentDetailsBean.gradeEntryByLetter && scoreRow.letterScore != null}">
 							<f:converter converterId="org.sakaiproject.gradebook.jsf.converter.LETTER_GRADE_CONVERTER" />
@@ -276,7 +280,7 @@
 			<h:outputText value="#{msgs.assignment_details_no_enrollments}" rendered="#{assignmentDetailsBean.emptyEnrollments}" />
 		</p>
 		
-		<div class="act gbButtonBar">
+		<div id="buttonDiv2" class="act gbButtonBar">
 			<h:commandButton
 				id="saveButton2"
 				styleClass="active"
@@ -285,7 +289,8 @@
 				disabled="#{assignmentDetailsBean.assignment.externallyMaintained || assignmentDetailsBean.allStudentsViewOnly}"
 				rendered="#{!assignmentDetailsBean.emptyEnrollments}"
 				tabindex="9998"
-				title="#{msgs.assignment_details_submit}"/>
+				title="#{msgs.assignment_details_submit}"
+				onclick="disableButton('buttonDiv2', this)"/>
 			<h:commandButton
 				id="cancelButton2"
 				value="#{msgs.assignment_details_cancel}"
@@ -294,8 +299,9 @@
 				disabled="#{assignmentDetailsBean.assignment.externallyMaintained || assignmentDetailsBean.allStudentsViewOnly}"
 				rendered="#{!assignmentDetailsBean.emptyEnrollments}"
 				tabindex="9999"
-				title="#{msgs.assignment_details_cancel}">
-					<f:param name="breadcrumbPage" value="#{assignmentDetailsBean.breadcrumbPage}" />
+				title="#{msgs.assignment_details_cancel}"
+				onclick="disableButton('buttonDiv2', this)">
+					<f:param name="breadcrumbPage" value="#{assignmentDetailsBean.breadcrumbPage}"/>
 			</h:commandButton>
 		</div>
 

@@ -66,6 +66,7 @@ import org.sakaiproject.tool.gradebook.GradableObject;
 import org.sakaiproject.tool.gradebook.jsf.AssignmentPointsConverter;
 import org.sakaiproject.tool.gradebook.jsf.CategoryPointsConverter;
 import org.sakaiproject.tool.gradebook.jsf.FacesUtil;
+import org.sakaiproject.util.ResourceLoader;
 
 /**
  * Backing bean for the visible list of assignments in the gradebook.
@@ -686,6 +687,14 @@ public class RosterBean extends EnrollmentTableBean implements Serializable, Pag
 		return letterGrade;
 	}
     
+    public void exportXlsNoCourseGrade(ActionEvent event){
+        if(logger.isInfoEnabled()) logger.info("exporting gradebook " + getGradebookUid() + " as Excel");
+        getGradebookBean().getEventTrackingService().postEvent("gradebook.downloadRoster","/gradebook/"+getGradebookId()+"/"+getAuthzLevel());
+        SpreadsheetUtil.downloadSpreadsheetData(getSpreadsheetData(false), 
+        		getDownloadFileName(getLocalizedString("export_gradebook_prefix")), 
+        		new SpreadsheetDataFileWriterXls());
+    }
+
     public void exportCsvNoCourseGrade(ActionEvent event){
         if(logger.isInfoEnabled()) logger.info("exporting gradebook " + getGradebookUid() + " as CSV");
         getGradebookBean().getEventTrackingService().postEvent("gradebook.downloadRoster","/gradebook/"+getGradebookId()+"/"+getAuthzLevel());
@@ -758,13 +767,22 @@ public class RosterBean extends EnrollmentTableBean implements Serializable, Pag
         
 		List gradableObjects = new ArrayList();
 		List allAssignments = new ArrayList(); 
+		List categoriesFilter = new ArrayList();
 		if (getCategoriesEnabled()) {
 			List categoryList = getGradebookManager().getCategoriesWithStats(getGradebookId(), getPreferencesBean().getAssignmentSortColumn(), 
 									getPreferencesBean().isAssignmentSortAscending(), getPreferencesBean().getCategorySortColumn(), getPreferencesBean().isCategorySortAscending());
+			
+			// filter out the CourseGrade from the Category list to prevent errors
+			for (Iterator catIter = categoryList.iterator(); catIter.hasNext();) {
+				Object catOrCourseGrade = catIter.next();
+				if (catOrCourseGrade instanceof Category) {
+					categoriesFilter.add((Category)catOrCourseGrade);
+				}
+			}
 
 			// then, we need to check for special grader permissions that may limit which categories may be viewed
 			if (!isUserAbleToGradeAll() && isUserHasGraderPermissions()) {
-				categoryList = getGradebookPermissionService().getCategoriesForUser(getGradebookId(), getUserUid(), categoryList, getGradebook().getCategory_type());
+				categoryList = getGradebookPermissionService().getCategoriesForUser(getGradebookId(), getUserUid(), categoriesFilter, getGradebook().getCategory_type());
 			}
 
 			if (categoryList != null && !categoryList.isEmpty()) {
@@ -843,6 +861,7 @@ public class RosterBean extends EnrollmentTableBean implements Serializable, Pag
     												boolean includeCourseGrade) {
     	List<List<Object>> spreadsheetData = new ArrayList<List<Object>>();
 
+    	NumberFormat nf = NumberFormat.getInstance(new ResourceLoader().getLocale());
     	// Build column headers and points possible rows.
         List<Object> headerRow = new ArrayList<Object>();
         List<Object> pointsPossibleRow = new ArrayList<Object>();
@@ -856,7 +875,7 @@ public class RosterBean extends EnrollmentTableBean implements Serializable, Pag
 
         	if (gradableObject instanceof Assignment) {
          		ptsPossible = new Double(((Assignment) gradableObject).getPointsPossible());
-         		colName = ((Assignment)gradableObject).getName() + " [" + ptsPossible.toString() + "]";
+         		colName = ((Assignment)gradableObject).getName() + " [" + nf.format(ptsPossible) + "]";
          	} else if (gradableObject instanceof CourseGrade && includeCourseGrade) {
          		colName = getLocalizedString("roster_course_grade_column_name");
          	}
@@ -897,8 +916,10 @@ public class RosterBean extends EnrollmentTableBean implements Serializable, Pag
         				}
         			}
         		}
-        		if (score != null && score instanceof Double)
+        		if (score != null && score instanceof Double) {
         			score = new Double(FacesUtil.getRoundDown(((Double)score).doubleValue(), 2));
+        			score = nf.format(score);
+        		}
     			
         		row.add(score);
         	}
